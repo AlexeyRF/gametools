@@ -1,4 +1,4 @@
-gemini_cleaner - очистка лишнего при копировании из gemini cli\n
-pixelartist - создание пиксельартов\n
-pechatnik - подготовка файлов для печати \n
+gemini_cleaner - очистка лишнего при копировании из gemini cli <br>
+pixelartist - создание пиксельартов<br>
+pechatnik - подготовка файлов для печати <br>
 convertator - конвертация json -> python list
