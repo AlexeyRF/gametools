@@ -3,3 +3,4 @@ pixelartist - создание пиксельартов<br>
 pechatnik - подготовка файлов для печати <br>
 convertator - конвертация json -> python list <br>
 redactor - наложение эффектов на аудио
+orkestr - мой старый плеер для музыки
