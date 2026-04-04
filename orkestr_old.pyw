@@ -9,7 +9,7 @@ import pystray
 from PIL import Image, ImageTk
 import threading
 import time
-from win10toast import ToastNotifier  # Для уведомлений
+from win10toast import ToastNotifier 
 
 mixer.init()
 
@@ -37,7 +37,7 @@ class Config:
     def create_default_config(self):
         self.config['Settings'] = {
             'music_folder': os.path.join(os.path.expanduser("~"), "Музыка"),
-            'notifications': 'True'  # Уведомления включены по умолчанию
+            'notifications': 'True'  
         }
         self.config['Colors'] = {
             'background': '#0a1a2f',
@@ -63,7 +63,7 @@ class MusicPlayer:
         self.original_playlist = []
         self.current_track_length = 0
         self.auto_scroll = True
-        self.toaster = ToastNotifier()  # Инициализация уведомлений
+        self.toaster = ToastNotifier()  
         
         self.setup_ui()
         self.load_music()
@@ -76,11 +76,11 @@ class MusicPlayer:
         self.root.overrideredirect(True)
         self.root.configure(bg=self.config.bg_color)
         
-        # Верхняя панель
+
         self.title_bar = tk.Frame(self.root, bg=self.config.primary_color)
         self.title_bar.pack(fill=tk.X)
         
-        # Кнопки управления окном
+
         self.minimize_btn = tk.Button(self.title_bar, text="—", command=self.minimize_to_tray,
                                     bg=self.config.primary_color, fg=self.config.text_color, bd=0)
         self.minimize_btn.pack(side=tk.LEFT, padx=5)
@@ -89,7 +89,7 @@ class MusicPlayer:
                                   bg=self.config.primary_color, fg=self.config.text_color)
         self.title_label.pack(side=tk.LEFT, padx=10)
         
-        # Поиск
+
         self.search_var = tk.StringVar()
         self.search_entry = tk.Entry(self.title_bar, textvariable=self.search_var, width=20,
                                     bg=self.config.secondary_color, fg=self.config.text_color)
@@ -100,11 +100,11 @@ class MusicPlayer:
                                  bg=self.config.primary_color, fg=self.config.text_color, bd=0)
         self.close_btn.pack(side=tk.RIGHT)
         
-        # Основной контейнер
+
         self.main_frame = tk.Frame(self.root, bg=self.config.bg_color)
         self.main_frame.pack(fill=tk.BOTH, expand=True)
         
-        # Список треков
+
         self.canvas = tk.Canvas(self.main_frame, bg=self.config.bg_color, highlightthickness=0)
         self.scrollbar = ttk.Scrollbar(self.main_frame, orient="vertical", command=self.canvas.yview)
         self.scrollable_frame = tk.Frame(self.canvas, bg=self.config.bg_color)
@@ -118,7 +118,7 @@ class MusicPlayer:
         self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         
-        # Панель управления
+
         self.control_frame = tk.Frame(self.root, bg=self.config.primary_color)
         self.control_frame.pack(fill=tk.X, pady=5)
         
@@ -323,7 +323,6 @@ class MusicPlayer:
         self.canvas.yview_moveto(self.current_index / len(self.playlist))
 
     def show_notification(self, message):
-        """Показывает уведомление, если они включены в конфигурации"""
         if self.config.notifications_enabled:
             self.toaster.show_toast("Оркестр", message, duration=3, threaded=True)
 
@@ -352,15 +351,13 @@ class MusicPlayer:
         threading.Thread(target=self.tray_icon.run, daemon=True).start()
 
     def show_window(self):
-        """Открывает окно поверх всех окон и активирует его"""
-        self.root.deiconify()  # Восстанавливаем окно
-        self.root.lift()  # Поднимаем окно поверх всех других окон
-        self.root.attributes('-topmost', True)  # Делаем окно поверх всех окон
-        self.root.after(100, lambda: self.root.attributes('-topmost', False))  # Снимаем флаг через 100 мс
+        self.root.deiconify()
+        self.root.lift() 
+        self.root.attributes('-topmost', True) 
+        self.root.after(100, lambda: self.root.attributes('-topmost', False))  
 
     def minimize_to_tray(self):
-        """Сворачивает окно в трей"""
-        self.root.withdraw()  # Скрываем окно
+        self.root.withdraw() 
 
     def quit_app(self):
         self.tray_icon.stop()
